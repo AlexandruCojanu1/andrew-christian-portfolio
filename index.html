@@ -1,0 +1,1620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andrew Christian Giurgea — Fashion Designer & Creative Director</title>
+    <meta name="description" content="Fashion Designer, Stylist & Creative Director. Coventry University BA Fashion Design. London Fashion Week, ZARA, Ike-Lima.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           RESET & BASE
+        ═══════════════════════════════════════════ */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0a0a0a;
+            --white: #f5f0eb;
+            --red: #9B1B1B;
+            --cream: #f5f0eb;
+            --serif: 'Instrument Serif', Georgia, serif;
+            --sans: 'Space Grotesk', -apple-system, sans-serif;
+            --emerald: #1a5c42;
+            --neon-pink: #c41e7f;
+            --champagne: #c9a96e;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+            scrollbar-width: thin;
+            scrollbar-color: var(--red) var(--black);
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--black);
+            color: var(--white);
+            overflow-x: hidden;
+            cursor: default;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        ::selection {
+            background: var(--red);
+            color: var(--white);
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* ═══════════════════════════════════════════
+           CUSTOM CURSOR
+        ═══════════════════════════════════════════ */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 1.5px solid var(--white);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 10000;
+            transition: transform 0.15s ease, opacity 0.15s ease, border-color 0.3s;
+            mix-blend-mode: difference;
+        }
+        .cursor.hover {
+            transform: scale(3);
+            border-color: var(--red);
+        }
+
+        /* ═══════════════════════════════════════════
+           LOADER
+        ═══════════════════════════════════════════ */
+        .loader {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: var(--black);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .loader-name {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 4rem);
+            color: var(--white);
+            opacity: 0;
+            letter-spacing: 0.05em;
+        }
+        .loader-line {
+            width: 0;
+            height: 1px;
+            background: var(--red);
+        }
+        .loader-count {
+            font-family: var(--sans);
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--white);
+            opacity: 0.5;
+        }
+
+        /* ═══════════════════════════════════════════
+           NAVIGATION
+        ═══════════════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 2.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            mix-blend-mode: difference;
+        }
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.25rem;
+            letter-spacing: 0.1em;
+            font-style: italic;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-family: var(--sans);
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            padding-bottom: 2px;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--white);
+            transition: width 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .nav-links a:hover::after { width: 100%; }
+
+        /* ═══════════════════════════════════════════
+           HERO
+        ═══════════════════════════════════════════ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+        }
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 30%;
+            filter: brightness(0.4);
+        }
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.1) 40%, rgba(10,10,10,0.7) 100%);
+            z-index: 2;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            padding: 0 2rem;
+            max-width: 1200px;
+            margin-top: auto;
+            margin-bottom: 5rem;
+        }
+        .hero-label {
+            font-family: var(--sans);
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            opacity: 0;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 7vw, 7rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            opacity: 0;
+            font-style: italic;
+        }
+        .hero-title span.red { color: var(--red); font-style: normal; }
+        .hero-name {
+            font-family: var(--sans);
+            font-size: clamp(0.65rem, 1vw, 0.85rem);
+            letter-spacing: 0.5em;
+            text-transform: uppercase;
+            margin-top: 3rem;
+            opacity: 0;
+            font-weight: 300;
+        }
+        .hero-scroll {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0;
+        }
+        .hero-scroll span {
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            font-weight: 300;
+        }
+        .hero-scroll-line {
+            width: 1px;
+            height: 40px;
+            background: var(--white);
+            animation: scrollPulse 2s ease infinite;
+        }
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+            50% { opacity: 1; transform: scaleY(1); }
+        }
+
+        /* ═══════════════════════════════════════════
+           SECTION UTILITIES
+        ═══════════════════════════════════════════ */
+        .section-pad {
+            padding: 8rem 2.5rem;
+        }
+        .reveal { opacity: 0; transform: translateY(60px); }
+        .reveal.active { opacity: 1; transform: translateY(0); transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+
+        .img-reveal {
+            overflow: hidden;
+            position: relative;
+        }
+        .img-reveal img {
+            transform: scale(1.15);
+            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .img-reveal.active img {
+            transform: scale(1);
+        }
+
+        /* ═══════════════════════════════════════════
+           ABOUT / PROFILE
+        ═══════════════════════════════════════════ */
+        .about {
+            padding: 10rem 2.5rem;
+            background: var(--black);
+            position: relative;
+        }
+        .about-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        .about-image-wrap {
+            position: relative;
+        }
+        .about-image-wrap::before {
+            content: 'PROFILE';
+            font-family: var(--serif);
+            font-size: clamp(3rem, 6vw, 6rem);
+            position: absolute;
+            top: -5rem;
+            left: -1rem;
+            z-index: 2;
+            color: var(--white);
+            font-style: italic;
+            opacity: 0.15;
+        }
+        .about-image {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3/4;
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            filter: grayscale(0.3);
+            transition: filter 0.6s ease, transform 0.8s ease;
+        }
+        .about-image:hover img {
+            filter: grayscale(0);
+            transform: scale(1.03);
+        }
+        .about-image-border {
+            position: absolute;
+            inset: 1rem;
+            border: 1px solid rgba(155,27,27,0.3);
+            pointer-events: none;
+        }
+        .about-text { padding-left: 2rem; }
+        .about-name {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            font-style: italic;
+        }
+        .about-role {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--red);
+            margin-bottom: 2.5rem;
+            font-weight: 500;
+        }
+        .about-bio {
+            font-size: 1rem;
+            line-height: 1.8;
+            opacity: 0.75;
+            font-weight: 300;
+            max-width: 500px;
+            margin-bottom: 3rem;
+        }
+        .about-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .about-detail-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            margin-bottom: 0.3rem;
+        }
+        .about-detail-value {
+            font-family: var(--serif);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        /* ═══════════════════════════════════════════
+           EXPERIENCE MARQUEE
+        ═══════════════════════════════════════════ */
+        .marquee-section {
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            background: var(--black);
+        }
+        .marquee {
+            display: flex;
+            gap: 4rem;
+            animation: marquee 25s linear infinite;
+            width: max-content;
+        }
+        .marquee-item {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 4vw, 4rem);
+            white-space: nowrap;
+            opacity: 0.15;
+            font-style: italic;
+        }
+        .marquee-item .dot {
+            color: var(--red);
+            margin: 0 1rem;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ═══════════════════════════════════════════
+           PROJECTS INDEX
+        ═══════════════════════════════════════════ */
+        .projects-index {
+            padding: 8rem 2.5rem;
+            background: var(--black);
+        }
+        .projects-index-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .projects-index-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 7vw, 8rem);
+            line-height: 0.9;
+            font-style: italic;
+        }
+        .projects-index-count {
+            font-size: 0.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.4;
+        }
+        .projects-list {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .project-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 2rem;
+            align-items: center;
+            padding: 2.5rem 0;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+        .project-item:last-child { border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .project-item:hover { padding-left: 2rem; }
+        .project-item:hover .project-item-num { color: var(--red); }
+        .project-item:hover .project-item-arrow { opacity: 1; transform: translateX(0); }
+        .project-item-num {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            opacity: 0.3;
+            transition: color 0.4s ease;
+            font-style: italic;
+            width: 3rem;
+        }
+        .project-item-name {
+            font-family: var(--serif);
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-style: italic;
+        }
+        .project-item-tag {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            opacity: 0.4;
+            font-weight: 300;
+        }
+        .project-item-arrow {
+            font-size: 1.5rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+        }
+
+        /* Project item hover image — cursor-following */
+        .project-item-img {
+            position: fixed;
+            width: 400px;
+            height: 280px;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 99;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: opacity 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .project-item-img.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .project-item-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        @media (max-width: 968px) {
+            .project-item-img { display: none; }
+        }
+
+        /* ═══════════════════════════════════════════
+           PROJECT SECTIONS — SHARED
+        ═══════════════════════════════════════════ */
+        .project-section {
+            position: relative;
+            overflow: hidden;
+        }
+        .project-hero {
+            position: relative;
+            height: 100vh;
+            min-height: 600px;
+            display: flex;
+            align-items: flex-end;
+            padding: 4rem 2.5rem;
+            overflow: hidden;
+        }
+        .project-hero-bg {
+            position: absolute;
+            inset: 0;
+        }
+        .project-hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .project-hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(10,10,10,0.85) 0%, rgba(10,10,10,0.2) 40%, rgba(10,10,10,0.1) 100%);
+        }
+        .project-hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+        .project-num {
+            font-family: var(--serif);
+            font-size: clamp(4rem, 10vw, 10rem);
+            line-height: 1;
+            opacity: 0.1;
+            position: absolute;
+            top: -2rem;
+            left: -1rem;
+        }
+        .project-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 8vw, 7rem);
+            line-height: 0.95;
+            font-style: italic;
+        }
+        .project-subtitle {
+            font-size: 0.65rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.5;
+            margin-top: 1rem;
+            font-weight: 300;
+        }
+
+        .project-description {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 6rem 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+        .project-desc-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            opacity: 0.3;
+        }
+        .project-desc-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            opacity: 0.75;
+        }
+
+        /* Image grids */
+        .project-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2.5rem 6rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .grid-asymmetric {
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 1.5rem;
+        }
+        .grid-asymmetric-r {
+            display: grid;
+            grid-template-columns: 0.7fr 1.3fr;
+            gap: 1.5rem;
+        }
+        .grid-full {
+            margin-bottom: 1.5rem;
+        }
+        .grid-full img {
+            width: 100%;
+            height: auto;
+        }
+        .grid-gap { margin-bottom: 1.5rem; }
+
+        .project-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .project-grid .img-wrap {
+            overflow: hidden;
+            position: relative;
+        }
+        .project-grid .img-wrap:hover img {
+            transform: scale(1.04);
+        }
+
+        /* Project credits */
+        .project-credits {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem 6rem;
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+        .credit {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            opacity: 0.35;
+            font-weight: 300;
+        }
+        .credit strong {
+            font-weight: 500;
+            opacity: 1;
+        }
+
+        /* Divider between projects */
+        .project-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ═══════════════════════════════════════════
+           SKETCHES & IDEATIONS — RED
+        ═══════════════════════════════════════════ */
+        #sketches .project-title { color: var(--white); }
+        #sketches .project-num { color: var(--red); }
+
+        /* ═══════════════════════════════════════════
+           FULL MOON — EMERALD
+        ═══════════════════════════════════════════ */
+        #fullmoon { background: var(--black); }
+        #fullmoon .project-title { color: var(--white); }
+        #fullmoon .project-title span { color: var(--emerald); }
+        #fullmoon .project-num { color: var(--emerald); }
+
+        /* ═══════════════════════════════════════════
+           MATRIX — NEON
+        ═══════════════════════════════════════════ */
+        #matrix { background: #050508; }
+        #matrix .project-title span { color: var(--red); }
+        #matrix .project-num { color: var(--neon-pink); }
+
+        /* ═══════════════════════════════════════════
+           ZARA — CHAMPAGNE
+        ═══════════════════════════════════════════ */
+        #zara { background: #0d0b08; }
+        #zara .project-title span { color: var(--champagne); }
+        #zara .project-num { color: var(--champagne); }
+
+        /* ═══════════════════════════════════════════
+           MYSTIC JUNGLE
+        ═══════════════════════════════════════════ */
+        #jungle { background: #070a07; }
+        #jungle .project-title span { color: #3a7d4a; }
+
+        /* ═══════════════════════════════════════════
+           CV / EXPERIENCE SECTION
+        ═══════════════════════════════════════════ */
+        .experience {
+            padding: 10rem 2.5rem;
+            background: var(--black);
+            position: relative;
+        }
+        .experience-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 5rem;
+        }
+        .experience-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-style: italic;
+            line-height: 1;
+        }
+        .exp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 3rem;
+        }
+        .exp-col-title {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .exp-entry {
+            margin-bottom: 2rem;
+        }
+        .exp-year {
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            opacity: 0.35;
+            text-transform: uppercase;
+            margin-bottom: 0.3rem;
+        }
+        .exp-place {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 0.2rem;
+        }
+        .exp-desc {
+            font-size: 0.8rem;
+            opacity: 0.5;
+            font-weight: 300;
+        }
+        .skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+        .skill-tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 300;
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        /* ═══════════════════════════════════════════
+           CONTACT / FOOTER
+        ═══════════════════════════════════════════ */
+        .contact {
+            padding: 10rem 2.5rem 4rem;
+            background: var(--black);
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .contact-label {
+            font-size: 0.6rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            opacity: 0.3;
+            margin-bottom: 2rem;
+        }
+        .contact-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 6vw, 5rem);
+            font-style: italic;
+            line-height: 1.1;
+            margin-bottom: 3rem;
+        }
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+            margin-bottom: 6rem;
+        }
+        .contact-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+        }
+        .contact-link:hover { color: var(--red); }
+        .contact-link-label {
+            font-size: 0.55rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            opacity: 0.3;
+        }
+        .contact-link-value {
+            font-family: var(--serif);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+        .footer {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 2rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .footer-left {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            opacity: 0.25;
+        }
+        .footer-right {
+            font-size: 0.6rem;
+            letter-spacing: 0.15em;
+            opacity: 0.25;
+        }
+
+        /* ═══════════════════════════════════════════
+           LARGE STATEMENT TEXT
+        ═══════════════════════════════════════════ */
+        .statement {
+            padding: 8rem 2.5rem;
+            text-align: center;
+            background: var(--black);
+        }
+        .statement-text {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 4.5rem);
+            font-style: italic;
+            line-height: 1.2;
+            max-width: 900px;
+            margin: 0 auto;
+            opacity: 0.15;
+        }
+
+        /* ═══════════════════════════════════════════
+           HORIZONTAL IMAGE SCROLL
+        ═══════════════════════════════════════════ */
+        .horizontal-scroll {
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 0 2.5rem 4rem;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .horizontal-scroll::-webkit-scrollbar { display: none; }
+        .horizontal-scroll .h-img {
+            display: inline-block;
+            height: 55vh;
+            margin-right: 1.5rem;
+            overflow: hidden;
+        }
+        .horizontal-scroll .h-img:last-child { margin-right: 0; }
+        .horizontal-scroll .h-img img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .horizontal-scroll .h-img:hover img {
+            transform: scale(1.03);
+        }
+        .horizontal-scroll .h-img-sm {
+            height: 38vh;
+        }
+
+        /* ═══════════════════════════════════════════
+           PARALLAX IMAGE
+        ═══════════════════════════════════════════ */
+        .parallax-img {
+            width: 100%;
+            height: 70vh;
+            overflow: hidden;
+            position: relative;
+        }
+        .parallax-img img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            position: absolute;
+            top: -10%;
+        }
+
+        /* ═══════════════════════════════════════════
+           ANDREW PORTRAIT SECTION (between hero & about)
+        ═══════════════════════════════════════════ */
+        .portrait-strip {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 80vh;
+            min-height: 500px;
+        }
+        .portrait-strip .img-side {
+            overflow: hidden;
+        }
+        .portrait-strip .img-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1s ease;
+        }
+        .portrait-strip .img-side:hover img {
+            transform: scale(1.03);
+        }
+
+        /* ═══════════════════════════════════════════
+           RESPONSIVE
+        ═══════════════════════════════════════════ */
+        @media (max-width: 968px) {
+            .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+            .about-text { padding-left: 0; }
+            .exp-grid { grid-template-columns: 1fr; }
+            .project-description { grid-template-columns: 1fr; gap: 1.5rem; }
+            .grid-2, .grid-3, .grid-asymmetric, .grid-asymmetric-r { grid-template-columns: 1fr; }
+            .portrait-strip { grid-template-columns: 1fr; height: auto; }
+            .portrait-strip .img-side { height: 60vh; }
+            nav { padding: 1rem 1.5rem; }
+            .nav-links { display: none; }
+            .section-pad { padding: 5rem 1.5rem; }
+            .cursor { display: none; }
+            .project-hero { height: auto; min-height: unset; padding: 0; }
+            .project-hero-bg { position: relative; }
+            .project-hero-bg img { height: auto; }
+            .project-hero-overlay { pointer-events: none; }
+            .project-hero-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-title { font-size: 2.2rem; }
+            .project-title { font-size: 2.5rem !important; }
+            .contact-links { flex-direction: column; gap: 2rem; }
+            .footer { flex-direction: column; gap: 1rem; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CURSOR -->
+    <div class="cursor" id="cursor"></div>
+
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+        <div class="loader-name" id="loader-name">Andrew Christian</div>
+        <div class="loader-line" id="loader-line"></div>
+        <div class="loader-count" id="loader-count">Loading portfolio...</div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#" class="nav-logo">AC</a>
+        <ul class="nav-links">
+            <li><a href="#about" data-hover>About</a></li>
+            <li><a href="#work" data-hover>Work</a></li>
+            <li><a href="#experience-section" data-hover>Experience</a></li>
+            <li><a href="#contact" data-hover>Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="hero" id="hero">
+        <div class="hero-bg">
+            <img src="images/andrew-portrait-2.jpeg" alt="Andrew Christian Giurgea">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-label" id="hero-label">Fashion Designer &mdash; Stylist &mdash; Creative Director</p>
+            <h1 class="hero-title" id="hero-title">
+                I don&rsquo;t follow trends.<br>
+                <span class="red">I set the scene.</span>
+            </h1>
+            <p class="hero-name" id="hero-name">Andrew Christian Giurgea</p>
+        </div>
+        <div class="hero-scroll" id="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         ABOUT
+    ═══════════════════════════════════════════ -->
+    <section class="about" id="about">
+        <div class="about-inner">
+            <div class="about-image-wrap reveal">
+                <div class="about-image">
+                    <img src="images/andrew-portrait-1.jpeg" alt="Andrew Christian Giurgea — Profile">
+                    <div class="about-image-border"></div>
+                </div>
+            </div>
+            <div class="about-text reveal">
+                <h2 class="about-name">Andrew Christian<br>Giurgea</h2>
+                <p class="about-role">Fashion Designer &bull; Stylist &bull; Creative Director</p>
+                <p class="about-bio">
+                    The ingredients of my work are the creation of themes, concepts, styling, creative direction for fashion and the creation of art direction and set design for advertising commercials. I am a great storyteller and I express my creativity in developing conceptual photography motivated by authentic cultures, surrealism and lifestyle.
+                </p>
+                <div class="about-details">
+                    <div>
+                        <p class="about-detail-label">Education</p>
+                        <p class="about-detail-value">BA Fashion Design</p>
+                    </div>
+                    <div>
+                        <p class="about-detail-label">University</p>
+                        <p class="about-detail-value">Coventry University</p>
+                    </div>
+                    <div>
+                        <p class="about-detail-label">Based in</p>
+                        <p class="about-detail-value">Romania / UK</p>
+                    </div>
+                    <div>
+                        <p class="about-detail-label">Focus</p>
+                        <p class="about-detail-value">Editorial & Art Direction</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         MARQUEE
+    ═══════════════════════════════════════════ -->
+    <section class="marquee-section">
+        <div class="marquee">
+            <span class="marquee-item">London Fashion Week<span class="dot">&bull;</span></span>
+            <span class="marquee-item">ZARA<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Ike-Lima<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Studio Distriqt<span class="dot">&bull;</span></span>
+            <span class="marquee-item">CityPark Mall<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Coventry University<span class="dot">&bull;</span></span>
+            <span class="marquee-item">London Fashion Week<span class="dot">&bull;</span></span>
+            <span class="marquee-item">ZARA<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Ike-Lima<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Studio Distriqt<span class="dot">&bull;</span></span>
+            <span class="marquee-item">CityPark Mall<span class="dot">&bull;</span></span>
+            <span class="marquee-item">Coventry University<span class="dot">&bull;</span></span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PROJECTS INDEX
+    ═══════════════════════════════════════════ -->
+    <section class="projects-index" id="work">
+        <div class="projects-index-header reveal">
+            <h2 class="projects-index-title">Selected<br>Work</h2>
+            <span class="projects-index-count">05 Projects</span>
+        </div>
+        <div class="projects-list">
+            <a href="#sketches" class="project-item reveal" data-hover>
+                <span class="project-item-num">01</span>
+                <div>
+                    <p class="project-item-name">Sketches & Ideations</p>
+                    <p class="project-item-tag">Fashion Design &bull; Tarot Collection</p>
+                </div>
+                <div class="project-item-img"><img src="images/page-05.jpg" alt=""></div>
+                <span class="project-item-arrow">&rarr;</span>
+            </a>
+            <a href="#fullmoon" class="project-item reveal" data-hover>
+                <span class="project-item-num">02</span>
+                <div>
+                    <p class="project-item-name">Full Moon</p>
+                    <p class="project-item-tag">Editorial Styling &bull; Art Direction</p>
+                </div>
+                <div class="project-item-img"><img src="images/page-14.jpg" alt=""></div>
+                <span class="project-item-arrow">&rarr;</span>
+            </a>
+            <a href="#matrix" class="project-item reveal" data-hover>
+                <span class="project-item-num">03</span>
+                <div>
+                    <p class="project-item-name">Matrix</p>
+                    <p class="project-item-tag">Futurist Editorial &bull; Styling</p>
+                </div>
+                <div class="project-item-img"><img src="images/page-16.jpg" alt=""></div>
+                <span class="project-item-arrow">&rarr;</span>
+            </a>
+            <a href="#zara" class="project-item reveal" data-hover>
+                <span class="project-item-num">04</span>
+                <div>
+                    <p class="project-item-name">ZARA Editorial</p>
+                    <p class="project-item-tag">Styling &bull; Artistic Direction</p>
+                </div>
+                <div class="project-item-img"><img src="images/page-19.jpg" alt=""></div>
+                <span class="project-item-arrow">&rarr;</span>
+            </a>
+            <a href="#jungle" class="project-item reveal" data-hover>
+                <span class="project-item-num">05</span>
+                <div>
+                    <p class="project-item-name">Mystic Jungle</p>
+                    <p class="project-item-tag">Editorial &bull; Nature</p>
+                </div>
+                <div class="project-item-img"><img src="images/page-23.jpg" alt=""></div>
+                <span class="project-item-arrow">&rarr;</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         02. FULL MOON
+    ═══════════════════════════════════════════ -->
+    <section class="project-section" id="fullmoon">
+        <div class="project-hero">
+            <div class="project-hero-bg">
+                <img src="images/page-14.jpg" alt="Full Moon — Overhead Shot on Persian Carpet">
+            </div>
+            <div class="project-hero-overlay"></div>
+            <div class="project-hero-content reveal">
+                <span class="project-num">02</span>
+                <h2 class="project-title"><span>Full</span><br>Moon</h2>
+                <p class="project-subtitle">Surrealist Editorial &bull; Styling & Creative Direction</p>
+            </div>
+        </div>
+
+        <div class="project-description">
+            <p class="project-desc-label reveal">The Concept</p>
+            <p class="project-desc-text reveal">
+                In essence, the surrealistic beings that we can find in the very famous pieces of art like literature or paintings. Those are portraying for us different types of people that are more or less drowning in their own ego. Elements touched by the moon, Valentino references, emerald green velvet, and Persian carpets create the stage for this otherworldly editorial.
+            </p>
+        </div>
+
+        <!-- Horizontal scroll for the shoot images -->
+        <div class="horizontal-scroll">
+            <div class="h-img"><img src="images/page-11.jpg" alt="Full Moon — Styling Experiment"></div>
+            <div class="h-img"><img src="images/page-12.jpg" alt="Full Moon — Behind the Scenes"></div>
+            <div class="h-img"><img src="images/page-13.jpg" alt="Full Moon — Final Styling 3 Models"></div>
+            <div class="h-img h-img-sm"><img src="images/page-09.jpg" alt="Full Moon — Make-up Inspiration"></div>
+            <div class="h-img h-img-sm"><img src="images/page-10.jpg" alt="Full Moon — Valentino Research"></div>
+        </div>
+
+        <div class="project-credits">
+            <span class="credit"><strong>Photo:</strong> Razvan Sandu</span>
+            <span class="credit"><strong>Models:</strong> Pavel Anca, Lacra Ionela, Ozana</span>
+            <span class="credit"><strong>MUA:</strong> Cassandra Gorcea</span>
+            <span class="credit"><strong>Creative Direction:</strong> Andrew Christian Giurgea</span>
+        </div>
+    </section>
+
+    <div class="project-divider"></div>
+
+    <!-- ═══════════════════════════════════════════
+         03. MATRIX
+    ═══════════════════════════════════════════ -->
+    <section class="project-section" id="matrix">
+        <div class="project-hero">
+            <div class="project-hero-bg">
+                <img src="images/page-16.jpg" alt="Matrix — Underground Parking">
+            </div>
+            <div class="project-hero-overlay" style="background: linear-gradient(0deg, rgba(5,5,8,0.9) 0%, rgba(5,5,8,0.3) 40%, rgba(5,5,8,0.1) 100%);"></div>
+            <div class="project-hero-content reveal">
+                <span class="project-num">03</span>
+                <h2 class="project-title"><span>Matrix</span></h2>
+                <p class="project-subtitle">Futurist Editorial &bull; Leather &bull; Neon</p>
+            </div>
+        </div>
+
+        <div class="project-description" style="background: #050508;">
+            <p class="project-desc-label reveal">The Concept</p>
+            <p class="project-desc-text reveal">
+                The concept is based on futuristic elements and is inspired by the movie Matrix. It illustrates a moment in the future of a strong and seductive woman who is portrayed in an age of modern technology. Shot in an underground parking garage with shopping carts as props, full leather looks, futuristic LED glasses, and neon pink and purple lighting.
+            </p>
+        </div>
+
+        <div class="project-grid" style="background: #050508;">
+            <div class="grid-full grid-gap">
+                <div class="img-wrap reveal">
+                    <img src="images/page-17.jpg" alt="Matrix — LED Glasses & Neon">
+                </div>
+            </div>
+        </div>
+
+        <div class="project-credits" style="background: #050508;">
+            <span class="credit"><strong>Photo:</strong> Razvan Sandu</span>
+            <span class="credit"><strong>Hair:</strong> Raluca Aldea</span>
+            <span class="credit"><strong>Clothes:</strong> Studio Distriqt</span>
+            <span class="credit"><strong>Styling & Direction:</strong> Andrew Christian Giurgea</span>
+        </div>
+    </section>
+
+    <div class="project-divider"></div>
+
+    <!-- ═══════════════════════════════════════════
+         04. ZARA EDITORIAL
+    ═══════════════════════════════════════════ -->
+    <section class="project-section" id="zara">
+        <div class="project-hero">
+            <div class="project-hero-bg">
+                <img src="images/page-19.jpg" alt="ZARA Editorial — Mediterranean Summer">
+            </div>
+            <div class="project-hero-overlay" style="background: linear-gradient(0deg, rgba(13,11,8,0.9) 0%, rgba(13,11,8,0.2) 40%, rgba(13,11,8,0.05) 100%);"></div>
+            <div class="project-hero-content reveal">
+                <span class="project-num">04</span>
+                <h2 class="project-title"><span>ZARA</span><br>Editorial</h2>
+                <p class="project-subtitle">Sustainable Fashion &bull; Mediterranean Summer</p>
+            </div>
+        </div>
+
+        <div class="project-description" style="background: #0d0b08;">
+            <p class="project-desc-label reveal">The Concept</p>
+            <p class="project-desc-text reveal">
+                The editorial concept is based on the promotion of sustainable organic cotton materials. A series of styling variations in cappuccino, coffee, and gold Champagne color palette for a summer vibe effect. Shot outdoors with olive trees, white draperies, natural light, espadrille sandals, orange sunglasses, and crocheted bags &mdash; pure Mediterranean feel.
+            </p>
+        </div>
+
+        <div class="project-grid" style="background: #0d0b08;">
+            <div class="grid-2 grid-gap">
+                <div class="img-wrap reveal">
+                    <img src="images/page-20.jpg" alt="ZARA — Curtains & Espadrilles">
+                </div>
+                <div class="img-wrap reveal">
+                    <img src="images/page-21.jpg" alt="ZARA — Summer Duo Shots">
+                </div>
+            </div>
+        </div>
+
+        <div class="project-credits" style="background: #0d0b08;">
+            <span class="credit"><strong>Photo:</strong> Marius Tenet</span>
+            <span class="credit"><strong>Models:</strong> Olaru Adina, Olaru Daria</span>
+            <span class="credit"><strong>MUA:</strong> Cassandra Gorcea</span>
+            <span class="credit"><strong>Clothes:</strong> ZARA</span>
+            <span class="credit"><strong>Styling & Direction:</strong> Andrew Christian Giurgea</span>
+        </div>
+    </section>
+
+    <div class="project-divider"></div>
+
+    <!-- ═══════════════════════════════════════════
+         05. MYSTIC JUNGLE
+    ═══════════════════════════════════════════ -->
+    <section class="project-section" id="jungle">
+        <div class="project-hero">
+            <div class="project-hero-bg">
+                <img src="images/page-23.jpg" alt="Mystic Jungle — Nature & Femininity">
+            </div>
+            <div class="project-hero-overlay"></div>
+            <div class="project-hero-content reveal">
+                <span class="project-num">05</span>
+                <h2 class="project-title"><span>Mystic</span><br>Jungle</h2>
+                <p class="project-subtitle">Nature &bull; Femininity &bull; Editorial</p>
+            </div>
+        </div>
+
+        <div class="project-description" style="background: #070a07;">
+            <p class="project-desc-label reveal">The Concept</p>
+            <p class="project-desc-text reveal">
+                The concept of the project embodies the fusion of nature and femininity as a source of inspiration and motivation, while simultaneously expressing a desire to brew a cocktail of emotions. Exotic prints, pearls, tropical plants and surreal close-ups create an intimate universe where fashion meets the wild.
+            </p>
+        </div>
+
+        <div class="project-grid" style="background: #070a07;">
+            <div class="grid-full grid-gap">
+                <div class="img-wrap reveal">
+                    <img src="images/page-24.jpg" alt="Mystic Jungle — Final Shots">
+                </div>
+            </div>
+        </div>
+
+        <div class="project-credits" style="background: #070a07;">
+            <span class="credit"><strong>Photo:</strong> Cidarleanu Elena</span>
+            <span class="credit"><strong>Model:</strong> Anna Verbitchi</span>
+            <span class="credit"><strong>Hair:</strong> Mihaela Osman</span>
+            <span class="credit"><strong>MUA:</strong> Sponache Anisia</span>
+            <span class="credit"><strong>Clothes:</strong> Luna Margaciova</span>
+            <span class="credit"><strong>Creative Direction:</strong> Andrew Christian Giurgea</span>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         STATEMENT
+    ═══════════════════════════════════════════ -->
+    <section class="statement">
+        <p class="statement-text reveal">&ldquo;The creation of themes, concepts, and visual stories through styling, art direction and set design.&rdquo;</p>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         EXPERIENCE
+    ═══════════════════════════════════════════ -->
+    <section class="experience" id="experience-section">
+        <div class="experience-inner">
+            <div class="experience-header reveal">
+                <h2 class="experience-title">Experience<br>& Skills</h2>
+            </div>
+
+            <div class="exp-grid">
+                <div class="reveal">
+                    <h3 class="exp-col-title">Education</h3>
+                    <div class="exp-entry">
+                        <p class="exp-year">2017 &ndash; 2018</p>
+                        <p class="exp-place">Coventry University</p>
+                        <p class="exp-desc">Foundation Diploma in Arts & Design</p>
+                    </div>
+                    <div class="exp-entry">
+                        <p class="exp-year">2018 &ndash; 2021</p>
+                        <p class="exp-place">Coventry University</p>
+                        <p class="exp-desc">BA in Fashion Design</p>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3 class="exp-col-title">Work Experience</h3>
+                    <div class="exp-entry">
+                        <p class="exp-year">2020</p>
+                        <p class="exp-place">London Fashion Week</p>
+                        <p class="exp-desc">Styling Assistant</p>
+                    </div>
+                    <div class="exp-entry">
+                        <p class="exp-year">2021</p>
+                        <p class="exp-place">Ike-Lima</p>
+                        <p class="exp-desc">Editorial Styling & Artistic Direction</p>
+                    </div>
+                    <div class="exp-entry">
+                        <p class="exp-year">2022</p>
+                        <p class="exp-place">ZARA</p>
+                        <p class="exp-desc">Styling & Artistic Direction</p>
+                    </div>
+                    <div class="exp-entry">
+                        <p class="exp-year">2021 &ndash; 2022</p>
+                        <p class="exp-place">CityPark Mall Constanta</p>
+                        <p class="exp-desc">Personal Stylist</p>
+                    </div>
+                    <div class="exp-entry">
+                        <p class="exp-year">2020 &ndash; 2022</p>
+                        <p class="exp-place">Studio Distriqt</p>
+                        <p class="exp-desc">Fashion Stylist & Artistic Coordinator</p>
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <h3 class="exp-col-title">Skills</h3>
+                    <div class="skills-list">
+                        <span class="skill-tag">Adobe Photoshop</span>
+                        <span class="skill-tag">Adobe Illustrator</span>
+                        <span class="skill-tag">Adobe InDesign</span>
+                        <span class="skill-tag">Fashion Trends</span>
+                        <span class="skill-tag">Styling</span>
+                        <span class="skill-tag">Editorial</span>
+                        <span class="skill-tag">Visual Identity</span>
+                        <span class="skill-tag">Creative Direction</span>
+                        <span class="skill-tag">Art Direction</span>
+                        <span class="skill-tag">Set Design</span>
+                        <span class="skill-tag">Magazines</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CONTACT
+    ═══════════════════════════════════════════ -->
+    <section class="contact" id="contact">
+        <div class="contact-inner">
+            <p class="contact-label reveal">Get in Touch</p>
+            <h2 class="contact-title reveal">Let&rsquo;s create<br>something beautiful.</h2>
+            <div class="contact-links reveal">
+                <a href="mailto:giurgea.andrei10@yahoo.com" class="contact-link" data-hover>
+                    <span class="contact-link-label">Email</span>
+                    <span class="contact-link-value">giurgea.andrei10@yahoo.com</span>
+                </a>
+                <a href="https://instagram.com/itsandrewchristian" target="_blank" class="contact-link" data-hover>
+                    <span class="contact-link-label">Instagram</span>
+                    <span class="contact-link-value">@itsandrewchristian</span>
+                </a>
+                <a href="tel:+40736990997" class="contact-link" data-hover>
+                    <span class="contact-link-label">Phone</span>
+                    <span class="contact-link-value">+40 736 990 997</span>
+                </a>
+            </div>
+
+            <div class="footer">
+                <p class="footer-left">&copy; 2026 Andrew Christian Giurgea. All rights reserved.</p>
+                <p class="footer-right">Fashion Designer &bull; Stylist &bull; Creative Director</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCRIPTS — GSAP + Custom
+    ═══════════════════════════════════════════ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script>
+        // ── LOADER ──────────────────────────────
+        const loader = document.getElementById('loader');
+        const loaderName = document.getElementById('loader-name');
+        const loaderLine = document.getElementById('loader-line');
+
+        gsap.timeline()
+            .to(loaderName, { opacity: 1, duration: 0.8, ease: 'power2.out' })
+            .to(loaderLine, { width: '120px', duration: 1.2, ease: 'power2.inOut' })
+            .to(loader, {
+                yPercent: -100,
+                duration: 1,
+                ease: 'power4.inOut',
+                delay: 0.3,
+                onComplete: () => {
+                    loader.style.display = 'none';
+                    animateHero();
+                }
+            });
+
+        // ── HERO ANIMATION ──────────────────────
+        function animateHero() {
+            gsap.timeline()
+                .to('#hero-label', { opacity: 0.6, duration: 0.8, ease: 'power2.out' })
+                .to('#hero-title', { opacity: 1, y: 0, duration: 1.2, ease: 'power3.out' }, '-=0.4')
+                .to('#hero-name', { opacity: 0.5, duration: 0.8, ease: 'power2.out' }, '-=0.6')
+                .to('#hero-scroll', { opacity: 0.4, duration: 0.6, ease: 'power2.out' }, '-=0.3');
+        }
+
+        // ── CUSTOM CURSOR ───────────────────────
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0, mouseY = 0, curX = 0, curY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateCursor() {
+            curX += (mouseX - curX) * 0.12;
+            curY += (mouseY - curY) * 0.12;
+            cursor.style.left = curX - 10 + 'px';
+            cursor.style.top = curY - 10 + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+
+        document.querySelectorAll('[data-hover], a, .project-item, .skill-tag').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // ── PROJECT LIST HOVER IMAGES (cursor-following) ──
+        const projectItems = document.querySelectorAll('.project-item');
+        let imgX = 0, imgY = 0, targetImgX = 0, targetImgY = 0;
+        let activeImg = null;
+
+        function updateImgPos() {
+            imgX += (targetImgX - imgX) * 0.08;
+            imgY += (targetImgY - imgY) * 0.08;
+            if (activeImg) {
+                const clampedY = Math.min(imgY, window.innerHeight - 300);
+                const clampedYTop = Math.max(clampedY, 10);
+                activeImg.style.left = imgX + 'px';
+                activeImg.style.top = clampedYTop + 'px';
+            }
+            requestAnimationFrame(updateImgPos);
+        }
+        updateImgPos();
+
+        projectItems.forEach(item => {
+            const img = item.querySelector('.project-item-img');
+            if (!img) return;
+
+            item.addEventListener('mouseenter', () => {
+                activeImg = img;
+                img.classList.add('visible');
+            });
+
+            item.addEventListener('mouseleave', () => {
+                img.classList.remove('visible');
+                activeImg = null;
+            });
+
+            item.addEventListener('mousemove', (e) => {
+                targetImgX = e.clientX - 200;
+                targetImgY = e.clientY - 340;
+            });
+        });
+
+        // ── SCROLL REVEAL ───────────────────────
+        gsap.registerPlugin(ScrollTrigger);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            gsap.fromTo(el,
+                { opacity: 0, y: 60 },
+                {
+                    opacity: 1, y: 0,
+                    duration: 1,
+                    ease: 'power3.out',
+                    scrollTrigger: {
+                        trigger: el,
+                        start: 'top 85%',
+                        once: true
+                    }
+                }
+            );
+        });
+
+        // ── PARALLAX EFFECTS ────────────────────
+        document.querySelectorAll('.parallax-img img').forEach(img => {
+            gsap.to(img, {
+                yPercent: 15,
+                ease: 'none',
+                scrollTrigger: {
+                    trigger: img.parentElement,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    scrub: 1
+                }
+            });
+        });
+
+        // ── HERO PARALLAX ───────────────────────
+        gsap.to('.hero-bg img', {
+            yPercent: 20,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.hero',
+                start: 'top top',
+                end: 'bottom top',
+                scrub: 1
+            }
+        });
+
+        // ── NAV HIDE ON SCROLL ──────────────────
+        let lastScroll = 0;
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            const current = window.scrollY;
+            if (current > lastScroll && current > 100) {
+                nav.style.transform = 'translateY(-100%)';
+                nav.style.transition = 'transform 0.4s ease';
+            } else {
+                nav.style.transform = 'translateY(0)';
+            }
+            lastScroll = current;
+        });
+
+        // ── SMOOTH ANCHOR SCROLL ────────────────
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(link.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // ── IMAGE WRAP REVEAL ON SCROLL ─────────
+        document.querySelectorAll('.img-wrap').forEach(wrap => {
+            gsap.fromTo(wrap,
+                { clipPath: 'inset(100% 0 0 0)' },
+                {
+                    clipPath: 'inset(0% 0 0 0)',
+                    duration: 1.2,
+                    ease: 'power3.inOut',
+                    scrollTrigger: {
+                        trigger: wrap,
+                        start: 'top 80%',
+                        once: true
+                    }
+                }
+            );
+        });
+
+        // ── PROJECT HERO BG SCALE ON SCROLL ─────
+        document.querySelectorAll('.project-hero-bg img').forEach(img => {
+            gsap.fromTo(img,
+                { scale: 1.1 },
+                {
+                    scale: 1,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: img.closest('.project-hero'),
+                        start: 'top bottom',
+                        end: 'bottom top',
+                        scrub: 1
+                    }
+                }
+            );
+        });
+
+        // ── STATEMENT TEXT OPACITY ON SCROLL ────
+        gsap.to('.statement-text', {
+            opacity: 0.6,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: '.statement',
+                start: 'top 80%',
+                end: 'center center',
+                scrub: 1
+            }
+        });
+    </script>
+</body>
+</html>
