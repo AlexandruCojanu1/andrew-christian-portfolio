@@ -865,8 +865,91 @@
             opacity: 0.15;
         }
 
+/* ═══════════════════════════════════════════
+           FEATURE ROW
+        ═══════════════════════════════════════════ */
+        .feature-row {
+            background: var(--black);
+            padding: 6rem 2.5rem;
+        }
+        .feature-row-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+        .feature-card-img {
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .feature-card-img {
+            height: 65vh;
+        }
+        .feature-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .feature-card-img:hover img {
+            transform: scale(1.04);
+        }
+        @media (max-width: 768px) {
+            .feature-row-inner {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            .feature-row { padding: 3rem 1.5rem; }
+        }
+
         /* ═══════════════════════════════════════════
-           HORIZONTAL IMAGE SCROLL
+           SCROLL-DRIVEN GALLERY
+        ═══════════════════════════════════════════ */
+        .scroll-gallery {
+            overflow: hidden;
+            background: var(--black);
+        }
+        .scroll-gallery-sticky {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        .scroll-gallery-track {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0 4rem;
+            will-change: transform;
+        }
+        .scroll-gallery-item {
+            flex-shrink: 0;
+            height: 65vh;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .scroll-gallery-item img {
+            height: 100%;
+            width: auto;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .scroll-gallery-item:hover img {
+            transform: scale(1.03);
+        }
+        .scroll-gallery-item-sm {
+            height: 45vh;
+            align-self: center;
+        }
+        @media (max-width: 768px) {
+            .scroll-gallery-item { height: 40vh; }
+            .scroll-gallery-item-sm { height: 30vh; }
+            .scroll-gallery-track { gap: 1rem; padding: 0 1.5rem; }
+        }
+
+        /* ═══════════════════════════════════════════
+           HORIZONTAL IMAGE SCROLL (legacy)
         ═══════════════════════════════════════════ */
         .horizontal-scroll {
             overflow-x: auto;
@@ -994,7 +1077,7 @@
     ═══════════════════════════════════════════ -->
     <section class="hero" id="hero">
         <div class="hero-bg">
-            <img src="images/andrew-portrait-2.jpeg" alt="Andrew Christian Giurgea">
+            <img src="images/andrew-portrait-2.webp" alt="Andrew Christian Giurgea">
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -1018,7 +1101,7 @@
         <div class="about-inner">
             <div class="about-image-wrap reveal">
                 <div class="about-image">
-                    <img src="images/andrew-portrait-1.jpeg" alt="Andrew Christian Giurgea — Profile">
+                    <img src="images/andrew-portrait-1.webp" alt="Andrew Christian Giurgea — Profile">
                     <div class="about-image-border"></div>
                 </div>
             </div>
@@ -1085,7 +1168,7 @@
                     <p class="project-item-name">Sketches & Ideations</p>
                     <p class="project-item-tag">Fashion Design &bull; Tarot Collection</p>
                 </div>
-                <div class="project-item-img"><img src="images/page-05.jpg" alt=""></div>
+                <div class="project-item-img"><img src="images/page-05.webp" alt=""></div>
                 <span class="project-item-arrow">&rarr;</span>
             </a>
             <a href="#fullmoon" class="project-item reveal" data-hover>
@@ -1094,7 +1177,7 @@
                     <p class="project-item-name">Full Moon</p>
                     <p class="project-item-tag">Editorial Styling &bull; Art Direction</p>
                 </div>
-                <div class="project-item-img"><img src="images/page-14.jpg" alt=""></div>
+                <div class="project-item-img"><img src="images/page-14.webp" alt=""></div>
                 <span class="project-item-arrow">&rarr;</span>
             </a>
             <a href="#matrix" class="project-item reveal" data-hover>
@@ -1103,7 +1186,7 @@
                     <p class="project-item-name">Matrix</p>
                     <p class="project-item-tag">Futurist Editorial &bull; Styling</p>
                 </div>
-                <div class="project-item-img"><img src="images/page-16.jpg" alt=""></div>
+                <div class="project-item-img"><img src="images/page-16.webp" alt=""></div>
                 <span class="project-item-arrow">&rarr;</span>
             </a>
             <a href="#zara" class="project-item reveal" data-hover>
@@ -1112,7 +1195,7 @@
                     <p class="project-item-name">ZARA Editorial</p>
                     <p class="project-item-tag">Styling &bull; Artistic Direction</p>
                 </div>
-                <div class="project-item-img"><img src="images/page-19.jpg" alt=""></div>
+                <div class="project-item-img"><img src="images/page-19.webp" alt=""></div>
                 <span class="project-item-arrow">&rarr;</span>
             </a>
             <a href="#jungle" class="project-item reveal" data-hover>
@@ -1121,178 +1204,70 @@
                     <p class="project-item-name">Mystic Jungle</p>
                     <p class="project-item-tag">Editorial &bull; Nature</p>
                 </div>
-                <div class="project-item-img"><img src="images/page-23.jpg" alt=""></div>
+                <div class="project-item-img"><img src="images/page-23.webp" alt=""></div>
                 <span class="project-item-arrow">&rarr;</span>
             </a>
         </div>
     </section>
 
     <!-- ═══════════════════════════════════════════
-         02. FULL MOON
+         SCROLL-DRIVEN GALLERY
     ═══════════════════════════════════════════ -->
-    <section class="project-section" id="fullmoon">
-        <div class="project-hero">
-            <div class="project-hero-bg">
-                <img src="images/page-14.jpg" alt="Full Moon — Overhead Shot on Persian Carpet">
+    <section class="scroll-gallery" id="gallery">
+        <div class="scroll-gallery-sticky">
+            <div class="scroll-gallery-track">
+                <div class="scroll-gallery-item"><img src="images/page-11.webp" alt="Full Moon — Styling Experiment"></div>
+                <div class="scroll-gallery-item"><img src="images/page-12.webp" alt="Full Moon — Behind the Scenes"></div>
+                <div class="scroll-gallery-item"><img src="images/page-13.webp" alt="Full Moon — Final Styling 3 Models"></div>
+                <div class="scroll-gallery-item scroll-gallery-item-sm"><img src="images/page-09.webp" alt="Full Moon — Make-up Inspiration"></div>
+                <div class="scroll-gallery-item scroll-gallery-item-sm"><img src="images/page-10.webp" alt="Full Moon — Valentino Research"></div>
+                <div class="scroll-gallery-item"><img src="images/page-17.webp" alt="Matrix — LED Glasses & Neon"></div>
+                <div class="scroll-gallery-item"><img src="images/page-20.webp" alt="ZARA — Curtains & Espadrilles"></div>
+                <div class="scroll-gallery-item"><img src="images/page-21.webp" alt="ZARA — Summer Duo Shots"></div>
+                <div class="scroll-gallery-item"><img src="images/page-24.webp" alt="Mystic Jungle — Final Shots"></div>
             </div>
-            <div class="project-hero-overlay"></div>
-            <div class="project-hero-content reveal">
-                <span class="project-num">02</span>
-                <h2 class="project-title"><span>Full</span><br>Moon</h2>
-                <p class="project-subtitle">Surrealist Editorial &bull; Styling & Creative Direction</p>
-            </div>
-        </div>
-
-        <div class="project-description">
-            <p class="project-desc-label reveal">The Concept</p>
-            <p class="project-desc-text reveal">
-                In essence, the surrealistic beings that we can find in the very famous pieces of art like literature or paintings. Those are portraying for us different types of people that are more or less drowning in their own ego. Elements touched by the moon, Valentino references, emerald green velvet, and Persian carpets create the stage for this otherworldly editorial.
-            </p>
-        </div>
-
-        <!-- Horizontal scroll for the shoot images -->
-        <div class="horizontal-scroll">
-            <div class="h-img"><img src="images/page-11.jpg" alt="Full Moon — Styling Experiment"></div>
-            <div class="h-img"><img src="images/page-12.jpg" alt="Full Moon — Behind the Scenes"></div>
-            <div class="h-img"><img src="images/page-13.jpg" alt="Full Moon — Final Styling 3 Models"></div>
-            <div class="h-img h-img-sm"><img src="images/page-09.jpg" alt="Full Moon — Make-up Inspiration"></div>
-            <div class="h-img h-img-sm"><img src="images/page-10.jpg" alt="Full Moon — Valentino Research"></div>
-        </div>
-
-        <div class="project-credits">
-            <span class="credit"><strong>Photo:</strong> Razvan Sandu</span>
-            <span class="credit"><strong>Models:</strong> Pavel Anca, Lacra Ionela, Ozana</span>
-            <span class="credit"><strong>MUA:</strong> Cassandra Gorcea</span>
-            <span class="credit"><strong>Creative Direction:</strong> Andrew Christian Giurgea</span>
         </div>
     </section>
 
-    <div class="project-divider"></div>
-
-    <!-- ═══════════════════════════════════════════
-         03. MATRIX
+<!-- ═══════════════════════════════════════════
+         SCROLL-DRIVEN GALLERY 2 (reverse: right → left)
     ═══════════════════════════════════════════ -->
-    <section class="project-section" id="matrix">
-        <div class="project-hero">
-            <div class="project-hero-bg">
-                <img src="images/page-16.jpg" alt="Matrix — Underground Parking">
+    <section class="scroll-gallery scroll-gallery-reverse" id="gallery2">
+        <div class="scroll-gallery-sticky">
+            <div class="scroll-gallery-track scroll-gallery-track-reverse">
+                <div class="scroll-gallery-item"><img src="images/gallery2-01.webp" alt="Editorial — Steps & Draping"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-02.webp" alt="Editorial — Overhead Persian Carpet"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-03.webp" alt="LFW — Fitting & Red Roses"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-04.webp" alt="Mystic Jungle — Close-up Portrait"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-05.webp" alt="Mystic Jungle — Green Kimono"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-06.webp" alt="Matrix — Leather Coat Vogue"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-07.webp" alt="LFW — Punk Tartan"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-08.webp" alt="Matrix — Shopping Carts"></div>
+                <div class="scroll-gallery-item"><img src="images/gallery2-09.webp" alt="LFW — Tartan Group"></div>
             </div>
-            <div class="project-hero-overlay" style="background: linear-gradient(0deg, rgba(5,5,8,0.9) 0%, rgba(5,5,8,0.3) 40%, rgba(5,5,8,0.1) 100%);"></div>
-            <div class="project-hero-content reveal">
-                <span class="project-num">03</span>
-                <h2 class="project-title"><span>Matrix</span></h2>
-                <p class="project-subtitle">Futurist Editorial &bull; Leather &bull; Neon</p>
-            </div>
-        </div>
-
-        <div class="project-description" style="background: #050508;">
-            <p class="project-desc-label reveal">The Concept</p>
-            <p class="project-desc-text reveal">
-                The concept is based on futuristic elements and is inspired by the movie Matrix. It illustrates a moment in the future of a strong and seductive woman who is portrayed in an age of modern technology. Shot in an underground parking garage with shopping carts as props, full leather looks, futuristic LED glasses, and neon pink and purple lighting.
-            </p>
-        </div>
-
-        <div class="project-grid" style="background: #050508;">
-            <div class="grid-full grid-gap">
-                <div class="img-wrap reveal">
-                    <img src="images/page-17.jpg" alt="Matrix — LED Glasses & Neon">
-                </div>
-            </div>
-        </div>
-
-        <div class="project-credits" style="background: #050508;">
-            <span class="credit"><strong>Photo:</strong> Razvan Sandu</span>
-            <span class="credit"><strong>Hair:</strong> Raluca Aldea</span>
-            <span class="credit"><strong>Clothes:</strong> Studio Distriqt</span>
-            <span class="credit"><strong>Styling & Direction:</strong> Andrew Christian Giurgea</span>
         </div>
     </section>
 
-    <div class="project-divider"></div>
-
     <!-- ═══════════════════════════════════════════
-         04. ZARA EDITORIAL
+         FEATURE ROW
     ═══════════════════════════════════════════ -->
-    <section class="project-section" id="zara">
-        <div class="project-hero">
-            <div class="project-hero-bg">
-                <img src="images/page-19.jpg" alt="ZARA Editorial — Mediterranean Summer">
-            </div>
-            <div class="project-hero-overlay" style="background: linear-gradient(0deg, rgba(13,11,8,0.9) 0%, rgba(13,11,8,0.2) 40%, rgba(13,11,8,0.05) 100%);"></div>
-            <div class="project-hero-content reveal">
-                <span class="project-num">04</span>
-                <h2 class="project-title"><span>ZARA</span><br>Editorial</h2>
-                <p class="project-subtitle">Sustainable Fashion &bull; Mediterranean Summer</p>
-            </div>
-        </div>
-
-        <div class="project-description" style="background: #0d0b08;">
-            <p class="project-desc-label reveal">The Concept</p>
-            <p class="project-desc-text reveal">
-                The editorial concept is based on the promotion of sustainable organic cotton materials. A series of styling variations in cappuccino, coffee, and gold Champagne color palette for a summer vibe effect. Shot outdoors with olive trees, white draperies, natural light, espadrille sandals, orange sunglasses, and crocheted bags &mdash; pure Mediterranean feel.
-            </p>
-        </div>
-
-        <div class="project-grid" style="background: #0d0b08;">
-            <div class="grid-2 grid-gap">
-                <div class="img-wrap reveal">
-                    <img src="images/page-20.jpg" alt="ZARA — Curtains & Espadrilles">
-                </div>
-                <div class="img-wrap reveal">
-                    <img src="images/page-21.jpg" alt="ZARA — Summer Duo Shots">
+    <section class="feature-row">
+        <div class="feature-row-inner">
+            <div class="feature-card reveal">
+                <div class="feature-card-img">
+                    <img src="images/feature-01.webp" alt="MALVIE French Magazine Editorial">
                 </div>
             </div>
-        </div>
-
-        <div class="project-credits" style="background: #0d0b08;">
-            <span class="credit"><strong>Photo:</strong> Marius Tenet</span>
-            <span class="credit"><strong>Models:</strong> Olaru Adina, Olaru Daria</span>
-            <span class="credit"><strong>MUA:</strong> Cassandra Gorcea</span>
-            <span class="credit"><strong>Clothes:</strong> ZARA</span>
-            <span class="credit"><strong>Styling & Direction:</strong> Andrew Christian Giurgea</span>
-        </div>
-    </section>
-
-    <div class="project-divider"></div>
-
-    <!-- ═══════════════════════════════════════════
-         05. MYSTIC JUNGLE
-    ═══════════════════════════════════════════ -->
-    <section class="project-section" id="jungle">
-        <div class="project-hero">
-            <div class="project-hero-bg">
-                <img src="images/page-23.jpg" alt="Mystic Jungle — Nature & Femininity">
-            </div>
-            <div class="project-hero-overlay"></div>
-            <div class="project-hero-content reveal">
-                <span class="project-num">05</span>
-                <h2 class="project-title"><span>Mystic</span><br>Jungle</h2>
-                <p class="project-subtitle">Nature &bull; Femininity &bull; Editorial</p>
-            </div>
-        </div>
-
-        <div class="project-description" style="background: #070a07;">
-            <p class="project-desc-label reveal">The Concept</p>
-            <p class="project-desc-text reveal">
-                The concept of the project embodies the fusion of nature and femininity as a source of inspiration and motivation, while simultaneously expressing a desire to brew a cocktail of emotions. Exotic prints, pearls, tropical plants and surreal close-ups create an intimate universe where fashion meets the wild.
-            </p>
-        </div>
-
-        <div class="project-grid" style="background: #070a07;">
-            <div class="grid-full grid-gap">
-                <div class="img-wrap reveal">
-                    <img src="images/page-24.jpg" alt="Mystic Jungle — Final Shots">
+            <div class="feature-card reveal">
+                <div class="feature-card-img">
+                    <img src="images/feature-02.webp" alt="City Park Mall — Styling Session">
                 </div>
             </div>
-        </div>
-
-        <div class="project-credits" style="background: #070a07;">
-            <span class="credit"><strong>Photo:</strong> Cidarleanu Elena</span>
-            <span class="credit"><strong>Model:</strong> Anna Verbitchi</span>
-            <span class="credit"><strong>Hair:</strong> Mihaela Osman</span>
-            <span class="credit"><strong>MUA:</strong> Sponache Anisia</span>
-            <span class="credit"><strong>Clothes:</strong> Luna Margaciova</span>
-            <span class="credit"><strong>Creative Direction:</strong> Andrew Christian Giurgea</span>
+            <div class="feature-card reveal">
+                <div class="feature-card-img">
+                    <img src="images/feature-03.webp" alt="City Park Mall — Fitting">
+                </div>
+            </div>
         </div>
     </section>
 
@@ -1603,6 +1578,61 @@
                 }
             );
         });
+
+        // ── SCROLL-DRIVEN GALLERY ───────────────
+        const galleryTrack = document.querySelector('.scroll-gallery-track');
+        const galleryStickyWrap = document.querySelector('.scroll-gallery-sticky');
+
+        if (galleryTrack && galleryStickyWrap) {
+            function setupGallery() {
+                const scrollDistance = galleryTrack.scrollWidth - window.innerWidth;
+
+                gsap.to(galleryTrack, {
+                    x: -scrollDistance,
+                    ease: 'none',
+                    scrollTrigger: {
+                        trigger: galleryStickyWrap,
+                        start: 'top top',
+                        end: '+=' + scrollDistance,
+                        scrub: 1,
+                        pin: true,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true
+                    }
+                });
+            }
+
+            window.addEventListener('load', setupGallery);
+        }
+
+// ── SCROLL-DRIVEN GALLERY 2 (REVERSE) ───
+        const galleryTrack2 = document.querySelector('.scroll-gallery-track-reverse');
+        const galleryStickyWrap2 = document.querySelector('.scroll-gallery-reverse .scroll-gallery-sticky');
+
+        if (galleryTrack2 && galleryStickyWrap2) {
+            function setupGallery2() {
+                const scrollDistance2 = galleryTrack2.scrollWidth - window.innerWidth;
+                // Start offset to the left (all the way right), scroll back to 0
+                gsap.fromTo(galleryTrack2,
+                    { x: -scrollDistance2 },
+                    {
+                        x: 0,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: galleryStickyWrap2,
+                            start: 'top top',
+                            end: '+=' + scrollDistance2,
+                            scrub: 1,
+                            pin: true,
+                            anticipatePin: 1,
+                            invalidateOnRefresh: true
+                        }
+                    }
+                );
+            }
+
+            window.addEventListener('load', setupGallery2);
+        }
 
         // ── STATEMENT TEXT OPACITY ON SCROLL ────
         gsap.to('.statement-text', {
